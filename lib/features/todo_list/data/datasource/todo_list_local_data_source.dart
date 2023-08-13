@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todos_app/features/todo_list/domain/entities/todo_list.dart';
 
@@ -11,6 +12,7 @@ abstract class TodoListLocalDataSource {
 
 const _key = 'key';
 
+@LazySingleton(as: TodoListLocalDataSource)
 class TodoListLocalDataSourceImpl implements TodoListLocalDataSource {
   final SharedPreferences sharedPreferences;
 
