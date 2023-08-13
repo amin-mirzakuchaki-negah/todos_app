@@ -13,7 +13,7 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
 
   TodoListBloc({required GetTodoList getTodoList})
       : _getTodoList = getTodoList,
-        super(TodoListInitial()) {
+        super(TodoListInitialState()) {
     //Initializing our bloc
     on<TodoListEvent>((event, emit) {});
   }
