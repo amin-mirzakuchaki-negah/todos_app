@@ -2,7 +2,7 @@ import 'package:todos_app/core/util/extension.dart';
 
 import '../../domain/entities/todo_list.dart';
 
-class TodoListModel extends TodoList {
+class TodoListModel extends TodoListEntity {
   const TodoListModel({
     required super.title,
     required super.description,
@@ -16,21 +16,21 @@ class TodoListModel extends TodoList {
   factory TodoListModel.fromJson(Map<String, dynamic> json) => TodoListModel(
         title: json['title'],
         description: json['description'],
-        id:json ['id'],
+        id: json['id'],
         done: json['done'],
-        category: (){
+        category: () {
           final value = json['category'];
-          if(value is! String) return null;
+          if (value is! String) return null;
           return value.toCategory;
         }(),
-        createdAt:  (){
+        createdAt: () {
           final value = json['createdAt'];
-          if(value is! String) return null;
+          if (value is! String) return null;
           return value.toJalali;
         }(),
-        updatedAt: (){
+        updatedAt: () {
           final value = json['updatedAt'];
-          if(value is! String) return null;
+          if (value is! String) return null;
           return value.toJalali;
         }(),
       );

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:todos_app/core/util/enum.dart';
 
-class TodoList extends Equatable {
+class TodoListEntity extends Equatable {
   final String title;
   final String description;
   final int id;
@@ -11,7 +11,7 @@ class TodoList extends Equatable {
   final Jalali? updatedAt;
   final Category? category;
 
-  const TodoList({
+  const TodoListEntity({
     required this.title,
     required this.description,
     required this.id,
@@ -21,12 +21,12 @@ class TodoList extends Equatable {
     required this.category,
   });
 
-  factory TodoList.create({
+  factory TodoListEntity.create({
     required String title,
     required String description,
     required Category category,
   }) =>
-      TodoList(
+      TodoListEntity(
         title: title,
         description: description,
         done: false,
@@ -36,11 +36,11 @@ class TodoList extends Equatable {
         category: category,
       );
 
-  TodoList copyWith({
+  TodoListEntity copyWith({
     int? id,
     Jalali? updatedAt,
   }) =>
-      TodoList(
+      TodoListEntity(
         title: title,
         description: description,
         id: id ?? this.id,
@@ -50,7 +50,7 @@ class TodoList extends Equatable {
         category: category,
       );
 
-  TodoList toggleDone() => TodoList(
+  TodoListEntity toggleDone() => TodoListEntity(
         title: title,
         description: description,
         id: id,
