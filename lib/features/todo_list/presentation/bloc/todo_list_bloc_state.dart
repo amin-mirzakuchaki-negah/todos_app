@@ -1,22 +1,30 @@
 part of 'todo_list_bloc.dart';
 
 sealed class TodoListState extends Equatable {
-  const TodoListState();
-  
+  final List<TodoListEntity> items;
+
+  const TodoListState({
+    this.items = const [],
+  });
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [items];
 }
 
 final class TodoListInitialState extends TodoListState {}
 
-class InputFailureState extends TodoListState {}
+class InputFailureState extends TodoListState {
+  
+  const InputFailureState({required super.items});
+}
 
-class TodoListLoadingState extends TodoListState {}
+class TodoListLoadingState extends TodoListState {
+  
+  const TodoListLoadingState({required super.items});
+}
 
 class TodoListSuccessState extends TodoListState {
-  final List<TodoListEntity> todoListEntity;
-
-  const TodoListSuccessState({required this.todoListEntity});
+  const TodoListSuccessState({required super.items});
 }
 
 class TodoListCacheFailureState extends TodoListState {

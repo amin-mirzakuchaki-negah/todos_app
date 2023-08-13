@@ -30,25 +30,28 @@ class _MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Todos"),
+        title: const Text("Todos", style: TextStyle(color: Colors.greenAccent)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocBuilder<TodoListBloc, TodoListState>(
           builder: (context, state) {
-            //initialing
-            if (state is TodoListInitialState) {
-              return const EmptyList();
-            } //
-            else if (state is TodoListLoadingState) {
+          
+           if (state is TodoListLoadingState) {
               return const LoadingDisplay();
             } //
-            else if (state is TodoListSuccessState) {
-              return const TodoDisplay();
+            if (state is TodoListCacheFailureState) {
+              return  Text(state.message?? "There is problem in getting todos from cache");
+            } //
+            
+            final items = state.items;
+            if(items.isEmpty) {
+              return const EmptyList();
             } //
             else {
-              return const Text("I'm not sure what is going on");
+              return const TodoDisplay();
             }
+            
           },
         ),
       ),

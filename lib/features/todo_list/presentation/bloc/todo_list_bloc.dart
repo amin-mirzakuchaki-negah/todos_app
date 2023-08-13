@@ -24,11 +24,11 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     GetTodoListEvent event,
     Emitter<TodoListState> emit,
   ) async {
-    emit(TodoListLoadingState());
+    emit(TodoListLoadingState(items: state.items));
     final result = await _getTodoList(const NoParams());
     final newState = await result.fold(
       (failure) async=> const TodoListCacheFailureState(),
-      (todolist) async=> TodoListSuccessState(todoListEntity: todolist),
+      (todolist) async=> TodoListSuccessState(items: todolist),
     );
     emit(newState);
   }
