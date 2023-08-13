@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:todos_app/features/todo_list/data/repositories/todo_list_repository_impl.dart';
 import 'package:todos_app/features/todo_list/domain/entities/todo_list.dart';
 import 'package:todos_app/features/todo_list/domain/usecases/get_todo_list.dart';
 
@@ -29,5 +28,6 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
       (failure) => const TodoListCacheFailureState(),
       (todolist) => TodoListSuccessState(todoListEntity: todolist),
     );
+    emit(newState);
   }
 }
