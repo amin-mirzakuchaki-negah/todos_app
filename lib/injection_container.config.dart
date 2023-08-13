@@ -20,7 +20,9 @@ import 'package:todos_app/features/todo_list/domain/repositories/todo_list_repos
     as _i5;
 import 'package:todos_app/features/todo_list/domain/usecases/get_todo_list.dart'
     as _i7;
-import 'package:todos_app/injection_container.dart' as _i8;
+import 'package:todos_app/features/todo_list/presentation/bloc/todo_list_bloc.dart'
+    as _i8;
+import 'package:todos_app/injection_container.dart' as _i9;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,8 +47,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i6.TodoListRepositoryImpl(gh<_i4.TodoListLocalDataSource>()));
     gh.lazySingleton<_i7.GetTodoList>(
         () => _i7.GetTodoList(gh<_i5.TodoListRepository>()));
+    gh.factory<_i8.TodoListBloc>(
+        () => _i8.TodoListBloc(getTodoList: gh<_i7.GetTodoList>()));
     return this;
   }
 }
 
-class _$RegisterSharedPreferences extends _i8.RegisterSharedPreferences {}
+class _$RegisterSharedPreferences extends _i9.RegisterSharedPreferences {}
