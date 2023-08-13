@@ -7,13 +7,13 @@ import '../../../../core/error/failure.dart';
 import '../entities/todo_list.dart';
 
 @lazySingleton
-class GetTodoList implements UseCase<TodoList, NoParams> {
+class GetTodoList implements UseCase<List<TodoList>, NoParams> {
   final TodoListRepository todoListRepository;
 
   GetTodoList(this.todoListRepository);
 
   @override
-  Future<Either<Failure, TodoList>> call(NoParams params) async {
+  Future<Either<Failure, List<TodoList>>> call(NoParams params) async {
     return await todoListRepository.getTodoList();
   }
 }
