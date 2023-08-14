@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos_app/features/todo_list/presentation/widgets/input_titles.dart';
 import 'package:todos_app/features/todo_list/presentation/widgets/todo_inputs.dart';
 
 class AddTodoScreen extends StatelessWidget {
@@ -24,25 +25,13 @@ class AddTodoScreen extends StatelessWidget {
             top: 50, left: paddingSymmetricValue, right: paddingSymmetricValue),
         child: Column(
           children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 15),
-                Text('تیتر', style: TextStyle(fontSize: 20)),
-              ],
-            ),
-            SizedBox(height: 10),
+            InputTitle(text: 'تیتر'),
+            const SizedBox(height: 10),
             TodoInput(text: ' تیتر اضافه کنید', lineNumber: 1),
             const SizedBox(
               height: 35,
             ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 15),
-                Text('توضیحات', style: TextStyle(fontSize: 20)),
-              ],
-            ),
+            InputTitle(text: 'توضیحات'),
             const SizedBox(height: 10),
             TodoInput(text: 'توضیحات اضافه کنید', lineNumber: 9)
           ],
