@@ -32,6 +32,7 @@ class _MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Todos", style: TextStyle(color: Colors.greenAccent)),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: ()=>print('hello'), child: const Icon(Icons.add)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocBuilder<TodoListBloc, TodoListState>(
@@ -56,5 +57,8 @@ class _MainScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  addTodoButton() async {
+
   }
 }
