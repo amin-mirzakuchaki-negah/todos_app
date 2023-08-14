@@ -4,7 +4,7 @@ import 'package:todos_app/core/usecases/usecases.dart';
 import 'package:todos_app/features/todo_list/domain/repositories/todo_list_repository.dart';
 
 import '../../../../core/error/failure.dart';
-import '../entities/todo_list.dart';
+import '../entities/todo_list_entity.dart';
 
 @lazySingleton
 class GetTodoList implements UseCase<List<TodoListEntity>, NoParams> {

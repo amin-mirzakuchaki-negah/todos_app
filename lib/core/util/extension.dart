@@ -26,3 +26,23 @@ extension StringExt on String {
     );
   }
 }
+
+extension CategoryExt on Category {
+  String get toValue {
+    switch (this) {
+      case Category.lifStyle:
+        return 'LIFE_STYLE';
+      case Category.sport:
+        return 'SPORT';
+      case Category.education:
+        return 'EDUCATION';
+    }
+  }
+}
+
+
+extension JalaliExt on Jalali {
+  String get toValue {
+    return toDateTime().toString();
+  }
+}

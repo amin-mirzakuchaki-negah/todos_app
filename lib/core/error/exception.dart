@@ -1,1 +1,2 @@
-class CacheException implements Exception {}
+class GetFromCacheException implements Exception {}
+class AddToCacheException implements Exception {}
