@@ -13,9 +13,28 @@ sealed class TodoListState extends Equatable {
 
 final class TodoListInitialState extends TodoListState {}
 
-class InputFailureState extends TodoListState {
+class TitleInputFailureState extends TodoListState {
   
-  const InputFailureState({required super.items});
+  // const TitleInputFailureState({required super.items});
+
+  final String? message;
+
+  const TitleInputFailureState([this.message]);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class DescriptionInputFailureState extends TodoListState {
+  
+  // const DescriptionInputFailureState({required super.items});
+
+  final String? message;
+
+  const DescriptionInputFailureState([this.message]);
+
+  @override
+  List<Object?> get props => [message];
 }
 
 class TodoListLoadingState extends TodoListState {
@@ -23,8 +42,12 @@ class TodoListLoadingState extends TodoListState {
   const TodoListLoadingState({required super.items});
 }
 
-class TodoListSuccessState extends TodoListState {
-  const TodoListSuccessState({required super.items});
+class GetTodoListSuccessState extends TodoListState {
+  const GetTodoListSuccessState({required super.items});
+}
+
+class AddTodoListSuccessState extends TodoListState {
+  const AddTodoListSuccessState({required super.items});
 }
 
 class TodoListCacheFailureState extends TodoListState {
