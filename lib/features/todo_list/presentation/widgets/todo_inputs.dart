@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TodoInput extends StatelessWidget {
-  TodoInput({super.key, required this.text, required this.lineNumber});
+  const TodoInput({super.key, required this.text, required this.lineNumber});
 
-  String text;
-  int lineNumber;
+  final String text;
+  final int lineNumber;
 
   @override
   Widget build(BuildContext context) {

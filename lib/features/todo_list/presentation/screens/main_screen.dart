@@ -31,13 +31,15 @@ class _MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("انجام دادنی ها", style: TextStyle(color: Colors.greenAccent)),
+        title: const Text("انجام دادنی ها",
+            style: TextStyle(color: Colors.greenAccent)),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            addTodoButton(context);
-          },
-          child: const Icon(Icons.add)),
+        onPressed: () {
+          addTodoButton(context);
+        },
+        child: const Icon(Icons.add),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocBuilder<TodoListBloc, TodoListState>(
