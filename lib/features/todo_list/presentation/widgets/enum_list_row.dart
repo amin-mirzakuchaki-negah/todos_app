@@ -16,8 +16,25 @@ class EnumListRow extends StatelessWidget {
         }).trim();
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            formattedName[0].toUpperCase() + formattedName.substring(1),
+          child: SizedBox(
+            width: 120,
+            height: 45,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(
+                    color: Colors.greenAccent,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+              child: Text(
+                  formattedName[0].toUpperCase() + formattedName.substring(1)),
+            ),
           ),
         );
       }).toList();
