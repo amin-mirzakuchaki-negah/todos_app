@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/util/enum.dart';
 
-class EnumListRow extends StatelessWidget {
-  const EnumListRow({super.key});
+class EnumListRow extends StatefulWidget {
+  EnumListRow({super.key});
+
+  @override
+  State<EnumListRow> createState() => _EnumListRowState();
+}
+
+class _EnumListRowState extends State<EnumListRow> {
+  bool isTapped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class EnumListRow extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
+                primary: isTapped ? Colors.grey : Colors.transparent,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(
