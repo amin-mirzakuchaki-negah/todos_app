@@ -9,4 +9,10 @@ sealed class TodoListEvent extends Equatable {
 
 class GetTodoListEvent extends TodoListEvent {}
 
-class AddTodoListEvent extends TodoListEvent {}
+class AddTodoListEvent extends TodoListEvent {
+  final String title;
+  final String description;
+  final MyCategory category;
+
+  const AddTodoListEvent({required this.title,required this.description,required this.category});
+}

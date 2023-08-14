@@ -23,7 +23,7 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
         super(TodoListInitialState()) {
     //Initializing our bloc
     on<GetTodoListEvent>(_onGetTodoListEvent);
-    on<AddTodoListEvent>(_onAddTodoListEvent as EventHandler<AddTodoListEvent, TodoListState>);
+    on<AddTodoListEvent>(_onAddTodoListEvent);
   }
 
   Future<void> _onGetTodoListEvent(
@@ -42,13 +42,15 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
   Future<void> _onAddTodoListEvent(
     AddTodoListEvent event,
     Emitter<TodoListState> emit,
-    String title,
-    String description,
-    MyCategory category,
   ) async {
-    final todo = await _addTodoList(Params(
+    final todo = await _addTodoList(
+      Params(
         entity: TodoListEntity.create(
-            title: title, description: description, category: category)));
+            title: event.title,
+            description: event.description,
+            category: event.category),
+      ),
+    );
 
     final newState = await todo.fold(
       (failure) async => const AddTodoListToCacheFailureState(),
