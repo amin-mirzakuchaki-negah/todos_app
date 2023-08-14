@@ -50,10 +50,19 @@ class AddTodoListSuccessState extends TodoListState {
   const AddTodoListSuccessState({required super.items});
 }
 
-class TodoListCacheFailureState extends TodoListState {
+class GetTodoListFromCacheFailureState extends TodoListState {
   final String? message;
 
-  const TodoListCacheFailureState([this.message]);
+  const GetTodoListFromCacheFailureState([this.message]);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class AddTodoListToCacheFailureState extends TodoListState {
+  final String? message;
+
+  const AddTodoListToCacheFailureState([this.message]);
 
   @override
   List<Object?> get props => [message];

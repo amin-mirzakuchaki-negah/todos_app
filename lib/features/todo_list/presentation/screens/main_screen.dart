@@ -40,7 +40,7 @@ class _MainScreen extends StatelessWidget {
            if (state is TodoListLoadingState) {
               return const LoadingDisplay();
             } //
-            if (state is TodoListCacheFailureState) {
+            if (state is GetTodoListFromCacheFailureState) {
               return  Text(state.message?? "There is problem in getting todos from cache");
             } //
             

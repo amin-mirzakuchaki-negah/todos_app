@@ -9,7 +9,7 @@ class TodoListEntity extends Equatable {
   final bool done;
   final Jalali? createdAt;
   final Jalali? updatedAt;
-  final Category? category;
+  final MyCategory? category;
 
   const TodoListEntity({
     required this.title,
@@ -24,7 +24,7 @@ class TodoListEntity extends Equatable {
   factory TodoListEntity.create({
     required String title,
     required String description,
-    required Category category,
+    required MyCategory category,
   }) =>
       TodoListEntity(
         title: title,

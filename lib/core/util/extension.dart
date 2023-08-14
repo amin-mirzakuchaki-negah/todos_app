@@ -2,14 +2,14 @@ import 'package:shamsi_date/shamsi_date.dart';
 import 'package:todos_app/core/util/enum.dart';
 
 extension StringExt on String {
-  Category? get toCategory {
+  MyCategory? get toCategory {
     switch (this) {
       case 'LIFE_STYLE':
-        return Category.lifStyle;
+        return MyCategory.lifStyle;
       case 'SPORT':
-        return Category.sport;
+        return MyCategory.sport;
       case 'EDUCATION':
-        return Category.education;
+        return MyCategory.education;
     }
     return null;
   }
@@ -27,14 +27,14 @@ extension StringExt on String {
   }
 }
 
-extension CategoryExt on Category {
+extension CategoryExt on MyCategory {
   String get toValue {
     switch (this) {
-      case Category.lifStyle:
+      case MyCategory.lifStyle:
         return 'LIFE_STYLE';
-      case Category.sport:
+      case MyCategory.sport:
         return 'SPORT';
-      case Category.education:
+      case MyCategory.education:
         return 'EDUCATION';
     }
   }

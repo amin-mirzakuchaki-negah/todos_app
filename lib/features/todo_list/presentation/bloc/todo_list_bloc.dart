@@ -5,6 +5,7 @@ import 'package:todos_app/features/todo_list/domain/entities/todo_list_entity.da
 import 'package:todos_app/features/todo_list/domain/usecases/get_todo_list.dart';
 
 import '../../../../core/usecases/usecases.dart';
+import '../../../../core/util/enum.dart';
 import '../../domain/usecases/add_todo_list.dart';
 
 part 'todo_list_bloc_event.dart';
@@ -15,13 +16,14 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
   final GetTodoList _getTodoList;
   final AddTodoList _addTodoList;
 
-  TodoListBloc({required GetTodoList getTodoList, required AddTodoList addTodoList})
+  TodoListBloc(
+      {required GetTodoList getTodoList, required AddTodoList addTodoList})
       : _getTodoList = getTodoList,
         _addTodoList = addTodoList,
         super(TodoListInitialState()) {
     //Initializing our bloc
     on<GetTodoListEvent>(_onGetTodoListEvent);
-    on<AddTodoListEvent>(_onAddTodoListEvent);
+    on<AddTodoListEvent>(_onAddTodoListEvent as EventHandler<AddTodoListEvent, TodoListState>);
   }
 
   Future<void> _onGetTodoListEvent(
@@ -31,8 +33,8 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     emit(TodoListLoadingState(items: state.items));
     final result = await _getTodoList(const NoParams());
     final newState = await result.fold(
-      (failure) async=> const TodoListCacheFailureState(),
-      (todolist) async=> GetTodoListSuccessState(items: todolist),
+      (failure) async => const GetTodoListFromCacheFailureState(),
+      (todolist) async => GetTodoListSuccessState(items: todolist),
     );
     emit(newState);
   }
@@ -40,12 +42,17 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
   Future<void> _onAddTodoListEvent(
     AddTodoListEvent event,
     Emitter<TodoListState> emit,
+    String title,
+    String description,
+    MyCategory category,
   ) async {
-    emit(TodoListLoadingState(items: state.items));
-    final result = await _getTodoList(const NoParams());
-    final newState = await result.fold(
-      (failure) async=> const TodoListCacheFailureState(),
-      (todolist) async=> GetTodoListSuccessState(items: todolist),
+    final todo = await _addTodoList(Params(
+        entity: TodoListEntity.create(
+            title: title, description: description, category: category)));
+
+    final newState = await todo.fold(
+      (failure) async => const AddTodoListToCacheFailureState(),
+      (todolist) async => AddTodoListSuccessState(items: todolist),
     );
     emit(newState);
   }
