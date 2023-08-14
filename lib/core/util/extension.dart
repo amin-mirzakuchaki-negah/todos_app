@@ -5,7 +5,7 @@ extension StringExt on String {
   MyCategory? get toCategory {
     switch (this) {
       case 'LIFE_STYLE':
-        return MyCategory.lifStyle;
+        return MyCategory.lifeStyle;
       case 'SPORT':
         return MyCategory.sport;
       case 'EDUCATION':
@@ -30,7 +30,7 @@ extension StringExt on String {
 extension CategoryExt on MyCategory {
   String get toValue {
     switch (this) {
-      case MyCategory.lifStyle:
+      case MyCategory.lifeStyle:
         return 'LIFE_STYLE';
       case MyCategory.sport:
         return 'SPORT';

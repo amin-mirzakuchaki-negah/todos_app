@@ -1,5 +1,5 @@
 enum MyCategory {
-  lifStyle, //  LIFE_STYLE
+  lifeStyle, //  LIFE_STYLE
   sport, // SPORT
   education, // EDUCATION
 }

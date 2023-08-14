@@ -24,9 +24,14 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class _MainScreen extends StatelessWidget {
+class _MainScreen extends StatefulWidget {
   const _MainScreen({super.key});
 
+  @override
+  State<_MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<_MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +41,7 @@ class _MainScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          addTodoButton(context);
+          _addTodoButton(context);
         },
         child: const Icon(Icons.add),
       ),
@@ -65,11 +70,18 @@ class _MainScreen extends StatelessWidget {
     );
   }
 
-  addTodoButton(BuildContext context) async {
+  void _addTodoButton(BuildContext context) async {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const AddTodoScreen(),
+        builder: (_context) => MultiBlocProvider(
+          providers: [
+            BlocProvider<TodoListBloc>.value(
+              value: context.read<TodoListBloc>(),
+            ),
+          ],
+          child: AddTodoScreen(),
+        ),
       ),
     );
   }

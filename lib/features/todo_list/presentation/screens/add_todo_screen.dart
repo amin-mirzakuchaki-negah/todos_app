@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:todos_app/features/todo_list/presentation/widgets/enum_list_row.dart';
 import 'package:todos_app/features/todo_list/presentation/widgets/input_titles.dart';
-import 'package:todos_app/features/todo_list/presentation/widgets/todo_inputs.dart';
 
 class AddTodoScreen extends StatelessWidget {
-  const AddTodoScreen({super.key});
+  AddTodoScreen({super.key});
+
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +23,11 @@ class AddTodoScreen extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            addTodo();
+          },
+          child: Icon(Icons.done)),
       body: Padding(
         padding: EdgeInsets.only(
             top: 50, left: paddingSymmetricValue, right: paddingSymmetricValue),
@@ -27,16 +35,37 @@ class AddTodoScreen extends StatelessWidget {
           children: [
             InputTitle(text: 'تیتر'),
             const SizedBox(height: 10),
-            TodoInput(text: ' تیتر اضافه کنید', lineNumber: 1),
-            const SizedBox(
-              height: 35,
+            TextField(
+              controller: _titleController,
+              onChanged: (value){},
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'تیتر اضافه کنید',
+              ),
+              minLines: 1,
+              maxLines: 1,
             ),
+            const SizedBox(height: 35),
             InputTitle(text: 'توضیحات'),
             const SizedBox(height: 10),
-            TodoInput(text: 'توضیحات اضافه کنید', lineNumber: 9)
+             TextField(
+              controller: _descriptionController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'توضیحات اضافه کنید',
+              ),
+              minLines: 9,
+              maxLines: 9,
+            ),
+            const SizedBox(height: 10),
+            InputTitle(text: 'دسته بندی ها'),
+            // Row
+            EnumListRow(),
           ],
         ),
       ),
     );
   }
+
+  addTodo() {}
 }

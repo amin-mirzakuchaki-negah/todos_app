@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class InputTitle extends StatelessWidget {
-  const  InputTitle({super.key, required this.text});
+  InputTitle({super.key, required this.text});
 
   final String text;
+
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
