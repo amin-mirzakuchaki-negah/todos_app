@@ -5,6 +5,6 @@ class EmptyList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Nothing to show!', style: TextStyle(fontSize: 18)));
+    return const Center(child: Text('چیزی برای نمایش وجود ندارد!', style: TextStyle(fontSize: 18)));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos_app/features/todo_list/presentation/widgets/todo_inputs.dart';
 
 class AddTodoScreen extends StatelessWidget {
   const AddTodoScreen({super.key});
@@ -9,8 +10,8 @@ class AddTodoScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title:
-            const Text('Add todo', style: TextStyle(color: Colors.greenAccent)),
+        title: const Text('اضافه کردن انجام دادن',
+            style: TextStyle(color: Colors.greenAccent)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.greenAccent),
           onPressed: () {
@@ -21,40 +22,29 @@ class AddTodoScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(
             top: 50, left: paddingSymmetricValue, right: paddingSymmetricValue),
-        child: const Column(
+        child: Column(
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(width: 15),
-                Text('Title', style: TextStyle(fontSize: 20)),
+                Text('تیتر', style: TextStyle(fontSize: 20)),
               ],
             ),
             SizedBox(height: 10),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Add a title',
-              ),
+            TodoInput(text: ' تیتر اضافه کنید', lineNumber: 1),
+            const SizedBox(
+              height: 35,
             ),
-            SizedBox(
-              height: 50,
-            ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(width: 15),
-                Text('Description', style: TextStyle(fontSize: 20)),
+                Text('توضیحات', style: TextStyle(fontSize: 20)),
               ],
             ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-              ),
-              minLines: 10, // Adjust the number of lines as needed
-              maxLines: 20,
-            ),
+            const SizedBox(height: 10),
+            TodoInput(text: 'توضیحات اضافه کنید', lineNumber: 9)
           ],
         ),
       ),

@@ -31,7 +31,7 @@ class _MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Todos", style: TextStyle(color: Colors.greenAccent)),
+        title: const Text("انجام دادنی ها", style: TextStyle(color: Colors.greenAccent)),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
