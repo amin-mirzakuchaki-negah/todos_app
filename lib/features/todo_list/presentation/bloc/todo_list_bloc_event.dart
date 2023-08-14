@@ -8,3 +8,5 @@ sealed class TodoListEvent extends Equatable {
 }
 
 class GetTodoListEvent extends TodoListEvent {}
+
+class AddTodoListEvent extends TodoListEvent {}
