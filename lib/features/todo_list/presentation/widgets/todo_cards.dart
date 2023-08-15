@@ -1,73 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:todos_app/core/util/extension.dart';
+import 'package:todos_app/features/todo_list/domain/entities/todo_list_entity.dart';
 
-// ignore: must_be_immutable
-class TodoCards extends StatefulWidget {
-  TodoCards({
+class TodoCards extends StatelessWidget {
+  final TodoListEntity item;
+  final Function(TodoListEntity) onCheckedClick;
+  const TodoCards({
     super.key,
-    required this.title,
-    required this.description,
-    required this.category,
+    required this.item,
+    required this.onCheckedClick,
   });
-
-  String title;
-  String description;
-  String category;
-
-  @override
-  State<TodoCards> createState() => _TodoCardsState();
-}
-
-class _TodoCardsState extends State<TodoCards> {
-  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Container(
-        // color: Colors.grey[800],
-        height: 80,
-        width: double.infinity,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //first line
-                Row(
-                  children: [
-                    Checkbox(activeColor: Colors.blue ,value: isChecked, onChanged: (bool? value) {
-                      setState(() {
-                        isChecked = value!;
-                      });
-                    }),
-                    const SizedBox(width: 20),
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
-                    const Spacer(),
-                    Text(
-                      widget.category,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const SizedBox(width: 20),
-                    Text(
-                      widget.description,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                )
-              ],
-            ),
+    return Container(
+      // color: Colors.grey[800],
+      margin: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
+      padding: const EdgeInsetsDirectional.only(end: 6,bottom: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Color(0xFF000000),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 7,
+            color: Colors.black.withOpacity(.2),
+            offset: const Offset(0, 4),
+          )
+        ],
+      ),
+      height: 80,
+      width: double.infinity,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //first line
+              Row(
+                children: [
+                  Checkbox(
+                      activeColor: Colors.blue,
+                      value: item.done,
+                      onChanged: (bool? value) {
+                        onCheckedClick;
+                      }),
+                  const SizedBox(width: 20),
+                  Text(
+                    item.title,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  const Spacer(),
+                  Text(
+                    item.category?.toStringValue ?? '-',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const SizedBox(width: 20),
+                  Text(
+                    item.description,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),

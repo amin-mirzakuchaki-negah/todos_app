@@ -35,4 +35,10 @@ class TodoListRepositoryImpl implements TodoListRepository {
       return Left(AddToCacheFailure());
     }
   }
+  
+  @override
+  Future<Either<Failure, List<TodoListEntity>>> updateTodoList(TodoListEntity todoList) {
+    // TODO: implement updateTodoList
+    throw UnimplementedError();
+  }
 }

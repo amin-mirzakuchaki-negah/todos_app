@@ -23,3 +23,10 @@ class AddTodoListEvent extends TodoListEvent {
   @override
   List<Object?> get props => [title, description, category];
 }
+
+class ToggleTodoListEvent extends TodoListEvent {
+  final TodoListEntity item;
+  const ToggleTodoListEvent({required this.item});
+  @override
+  List<Object?> get props => [item];
+}

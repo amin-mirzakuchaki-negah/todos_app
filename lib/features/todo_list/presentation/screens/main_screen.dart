@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos_app/features/todo_list/domain/entities/todo_list_entity.dart';
 import 'package:todos_app/features/todo_list/presentation/bloc/todo_list_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_app/features/todo_list/presentation/screens/add_todo_screen.dart';
@@ -69,7 +70,10 @@ class _MainScreenState extends State<_MainScreen> {
               return const EmptyList();
             } //
 
-            return TodoDisplay(todos: items);
+            return TodoDisplay(
+              todos: items,
+              onCheckClick: _onCheckClick,
+            );
           },
         ),
       ),
@@ -90,5 +94,9 @@ class _MainScreenState extends State<_MainScreen> {
         ),
       ),
     );
+  }
+
+  void _onCheckClick(TodoListEntity item) {
+    context.read<TodoListBloc>().add(event);
   }
 }
