@@ -70,6 +70,10 @@ class _MainScreenState extends State<_MainScreen> {
               return const EmptyList();
             } //
 
+            // if (state is ToggleSuccessState) {
+            //   _onCheckClick(state.items.elementAt(index));
+            // }
+
             return TodoDisplay(
               todos: items,
               onCheckClick: _onCheckClick,
@@ -97,6 +101,6 @@ class _MainScreenState extends State<_MainScreen> {
   }
 
   void _onCheckClick(TodoListEntity item) {
-    // context.read<TodoListBloc>().add(event);
+    context.read<TodoListBloc>().add(ToggleTodoListEvent(item: item));
   }
 }

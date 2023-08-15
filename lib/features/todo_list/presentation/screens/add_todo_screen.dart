@@ -144,24 +144,12 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   }
 
   void _addTodo() {
-    context.read<TodoListBloc>().add(AddTodoListEvent(
-          title: _titleController.text,
-          description: _descriptionController.text,
-          category: _selectedCategory,
-        ));
+    context.read<TodoListBloc>().add(
+          AddTodoListEvent(
+            title: _titleController.text,
+            description: _descriptionController.text,
+            category: _selectedCategory,
+          ),
+        );
   }
-
-  // MyCategory _stringToEnum({required MyCategory myCategory}) {
-  //   print(myCategory);
-  //   switch (myCategory) {
-  //     case 'lifeStyle':
-  //       return MyCategory.lifeStyle;
-  //     case 'Sport':
-  //       return MyCategory.sport;
-  //     case 'Education':
-  //       return MyCategory.education;
-  //     default:
-  //       throw ArgumentError('Invalid category string: $myCategory');
-  //   }
-  // }
 }

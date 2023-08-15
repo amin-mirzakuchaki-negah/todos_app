@@ -30,7 +30,7 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     //Initializing our bloc
     on<GetTodoListEvent>(_onGetTodoListEvent);
     on<AddTodoListEvent>(_onAddTodoListEvent, transformer: droppable());
-    on<ToggleTodoListEvent>(_onToggleTodoEvent);
+    on<ToggleTodoListEvent>(_onToggleTodoEvent, transformer: droppable());
   }
 
   Future<void> _onGetTodoListEvent(

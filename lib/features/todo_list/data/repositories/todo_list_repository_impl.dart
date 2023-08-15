@@ -37,8 +37,15 @@ class TodoListRepositoryImpl implements TodoListRepository {
   }
   
   @override
-  Future<Either<Failure, List<TodoListEntity>>> updateTodoList(TodoListEntity todoList) {
-    // TODO: implement updateTodoList
-    throw UnimplementedError();
+  Future<Either<Failure, List<TodoListEntity>>> updateTodoList(TodoListEntity todoList) async{
+    try {
+
+      final body = TodoListModel.fromEntity(todoList);
+      final items = await todoListLocalDataSource.updateTodoList(body);
+      return Right(items);
+    }
+    on AddToCacheException {
+      return Left(AddToCacheFailure());
+    }
   }
 }

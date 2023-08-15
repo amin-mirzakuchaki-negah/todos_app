@@ -15,11 +15,11 @@ class TodoCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // color: Colors.grey[800],
-      margin: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
-      padding: const EdgeInsetsDirectional.only(end: 6,bottom: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      padding: const EdgeInsetsDirectional.only(end: 6, bottom: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Color(0xFF000000),
+        color: const Color(0xFF000000),
         boxShadow: [
           BoxShadow(
             blurRadius: 7,
@@ -41,11 +41,10 @@ class TodoCards extends StatelessWidget {
               Row(
                 children: [
                   Checkbox(
-                      activeColor: Colors.blue,
-                      value: item.done,
-                      onChanged: (bool? value) {
-                        onCheckedClick;
-                      }),
+                    activeColor: Colors.blue,
+                    value: item.done,
+                    onChanged: (bool? value) => onCheckedClick(item),
+                  ),
                   const SizedBox(width: 20),
                   Text(
                     item.title,
