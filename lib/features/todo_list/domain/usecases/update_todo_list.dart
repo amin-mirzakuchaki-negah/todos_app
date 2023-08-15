@@ -8,11 +8,11 @@ import '../entities/todo_list_entity.dart';
 import '../repositories/todo_list_repository.dart';
 
 @lazySingleton
-class UpdateTodo implements UseCase<List<TodoListEntity>, UpdateParams> {
+class UpdateTodoList implements UseCase<List<TodoListEntity>, UpdateParams> {
 
   final TodoListRepository todoListRepository;
 
-  UpdateTodo(this.todoListRepository);
+  UpdateTodoList(this.todoListRepository);
 
   @override
   Future<Either<Failure, List<TodoListEntity>>> call(UpdateParams params) async {

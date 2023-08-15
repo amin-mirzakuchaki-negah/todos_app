@@ -30,3 +30,10 @@ class ToggleTodoListEvent extends TodoListEvent {
   @override
   List<Object?> get props => [item];
 }
+
+class DeleteTodoListEvent extends TodoListEvent {
+  final TodoListEntity item;
+  const DeleteTodoListEvent({required this.item});
+  @override
+  List<Object?> get props => [item];
+}

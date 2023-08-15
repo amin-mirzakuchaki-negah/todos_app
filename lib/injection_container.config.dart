@@ -51,8 +51,8 @@ extension GetItInjectableX on _i1.GetIt {
             sharedPreferences: gh<_i3.SharedPreferences>()));
     gh.lazySingleton<_i5.TodoListRepository>(
         () => _i6.TodoListRepositoryImpl(gh<_i4.TodoListLocalDataSource>()));
-    gh.lazySingleton<_i7.UpdateTodo>(
-        () => _i7.UpdateTodo(gh<_i5.TodoListRepository>()));
+    gh.lazySingleton<_i7.UpdateTodoList>(
+        () => _i7.UpdateTodoList(gh<_i5.TodoListRepository>()));
     gh.lazySingleton<_i8.AddTodoList>(
         () => _i8.AddTodoList(gh<_i5.TodoListRepository>()));
     gh.lazySingleton<_i9.DeleteTodoList>(() =>
@@ -62,7 +62,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i11.TodoListBloc>(() => _i11.TodoListBloc(
           getTodoList: gh<_i10.GetTodoList>(),
           addTodoList: gh<_i8.AddTodoList>(),
-          updateTodo: gh<_i7.UpdateTodo>(),
+          updateTodo: gh<_i7.UpdateTodoList>(),
+          deleteTodo: gh<_i9.DeleteTodoList>(),
         ));
     return this;
   }

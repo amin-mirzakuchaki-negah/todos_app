@@ -9,6 +9,7 @@ import 'package:todos_app/features/todo_list/domain/usecases/update_todo_list.da
 import '../../../../core/usecases/usecases.dart';
 import '../../../../core/util/enum.dart';
 import '../../domain/usecases/add_todo_list.dart';
+import '../../domain/usecases/delete_todo_list.dart';
 
 part 'todo_list_bloc_event.dart';
 part 'todo_list_bloc_state.dart';
@@ -17,20 +18,24 @@ part 'todo_list_bloc_state.dart';
 class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
   final GetTodoList _getTodoList;
   final AddTodoList _addTodoList;
-  final UpdateTodo _updateTodo;
+  final UpdateTodoList _updateTodo;
+  final DeleteTodoList _deleteTodo;
 
-  TodoListBloc(
-      {required GetTodoList getTodoList,
-      required AddTodoList addTodoList,
-      required UpdateTodo updateTodo})
-      : _getTodoList = getTodoList,
+  TodoListBloc({
+    required GetTodoList getTodoList,
+    required AddTodoList addTodoList,
+    required UpdateTodoList updateTodo,
+    required DeleteTodoList deleteTodo,
+  })  : _getTodoList = getTodoList,
         _addTodoList = addTodoList,
         _updateTodo = updateTodo,
+        _deleteTodo = deleteTodo,
         super(TodoListInitialState()) {
     //Initializing our bloc
     on<GetTodoListEvent>(_onGetTodoListEvent);
     on<AddTodoListEvent>(_onAddTodoListEvent, transformer: droppable());
     on<ToggleTodoListEvent>(_onToggleTodoEvent, transformer: droppable());
+    on<DeleteTodoListEvent>(_onDeleteTodoListEvent, transformer: droppable());
   }
 
   Future<void> _onGetTodoListEvent(
@@ -91,6 +96,19 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     final newState = await todo.fold(
       (failure) async => ToggleTodoFailureState(items: state.items),
       (todolist) async => ToggleSuccessState(items: todolist),
+    );
+    emit(newState);
+  }
+
+  Future<void> _onDeleteTodoListEvent(
+    DeleteTodoListEvent event,
+    Emitter<TodoListState> emit,
+  ) async {
+    final body = event.item;
+    final deletedTodo = await _deleteTodo(DeleteParams(entity: body));
+    final newState = await deletedTodo.fold(
+      (failure) => DeleteTodoFailureState(items: state.items),
+      (deletedtodolist) => DeleteTodoSuccessState(items: state.items),
     );
     emit(newState);
   }
