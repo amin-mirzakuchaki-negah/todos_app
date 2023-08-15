@@ -22,42 +22,39 @@ class TodoListRepositoryImpl implements TodoListRepository {
       return Left(GetFromCacheFailure());
     }
   }
-  
-  @override
-  Future<Either<Failure, List<TodoListEntity>>> addTodoList(TodoListEntity todoList) async {
-    try {
 
+  @override
+  Future<Either<Failure, List<TodoListEntity>>> addTodoList(
+      TodoListEntity todoList) async {
+    try {
       final body = TodoListModel.fromEntity(todoList);
       final items = await todoListLocalDataSource.addTodoList(body);
       return Right(items);
-    }
-    on AddToCacheException {
+    } on AddToCacheException {
       return Left(AddToCacheFailure());
     }
   }
-  
-  @override
-  Future<Either<Failure, List<TodoListEntity>>> updateTodoList(TodoListEntity todoList) async{
-    try {
 
+  @override
+  Future<Either<Failure, List<TodoListEntity>>> updateTodoList(
+      TodoListEntity todoList) async {
+    try {
       final body = TodoListModel.fromEntity(todoList);
       final items = await todoListLocalDataSource.updateTodoList(body);
       return Right(items);
-    }
-    on AddToCacheException {
+    } on AddToCacheException {
       return Left(AddToCacheFailure());
     }
   }
-  
-  @override
-  Future<Either<Failure, List<TodoListEntity>>> deleteOrRedoTodoList(TodoListEntity todoList) async {
-     try {
 
+  @override
+  Future<Either<Failure, List<TodoListEntity>>> deleteTodoList(
+      TodoListEntity todoList) async {
+    try {
       final body = TodoListModel.fromEntity(todoList);
       final items = await todoListLocalDataSource.deleteTodo(body.id);
       return Right(items);
-    }
-    on AddToCacheException {
+    } on AddToCacheException {
       return Left(AddToCacheFailure());
     }
   }
