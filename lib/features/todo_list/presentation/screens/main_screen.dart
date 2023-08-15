@@ -98,14 +98,10 @@ class _MainScreenState extends State<_MainScreen> {
   }
 
   void _onCheckClick(TodoListEntity item) {
-    var localSate = context.read<TodoListBloc>().state;
-    print('***********************$localSate***********************');
     context.read<TodoListBloc>().add(ToggleTodoListEvent(item: item));
   }
 
   void _deleteTodo(TodoListEntity item) {
-    var localSate = context.read<TodoListBloc>().state;
-    print('***********************$localSate***********************');
     context.read<TodoListBloc>().add(DeleteTodoListEvent(item: item));
   }
 }
