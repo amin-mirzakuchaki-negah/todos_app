@@ -16,7 +16,7 @@ class AddTodoList implements UseCase<List<TodoListEntity>, Params> {
 
   @override
   Future<Either<Failure, List<TodoListEntity>>> call(Params params) async {
-    return await todoListRepository.getTodoList();
+    return await todoListRepository.addTodoList(params.entity);
   }
 }
 

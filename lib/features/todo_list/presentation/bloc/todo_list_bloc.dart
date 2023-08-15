@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todos_app/features/todo_list/domain/entities/todo_list_entity.dart';
@@ -23,7 +24,7 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
         super(TodoListInitialState()) {
     //Initializing our bloc
     on<GetTodoListEvent>(_onGetTodoListEvent);
-    on<AddTodoListEvent>(_onAddTodoListEvent);
+    on<AddTodoListEvent>(_onAddTodoListEvent, transformer: droppable());
   }
 
   Future<void> _onGetTodoListEvent(
@@ -43,17 +44,32 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     AddTodoListEvent event,
     Emitter<TodoListState> emit,
   ) async {
-    final todo = await _addTodoList(
-      Params(
-        entity: TodoListEntity.create(
-            title: event.title,
-            description: event.description,
-            category: event.category),
-      ),
+    final title = event.title;
+    final description = event.description;
+    final category = event.category;
+    if (title.isEmpty) {
+      emit(TitleInputFailureState(items: state.items));
+      return;
+    }
+
+    if (description.isEmpty) {
+      emit(DescriptionInputFailureState(items: state.items));
+      return;
+    }
+
+    if (category == null) {
+      emit(CategoryInputFailureState(items: state.items));
+      return;
+    }
+    final body = TodoListEntity.create(
+      title: title,
+      description: description,
+      category: category,
     );
+    final todo = await _addTodoList(Params(entity: body));
 
     final newState = await todo.fold(
-      (failure) async => const AddTodoListToCacheFailureState(),
+      (failure) async =>  AddTodoListToCacheFailureState(items: state.items),
       (todolist) async => AddTodoListSuccessState(items: todolist),
     );
     emit(newState);

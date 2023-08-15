@@ -33,6 +33,12 @@ class _MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<_MainScreen> {
   @override
+  void initState() {
+    BlocProvider.of<TodoListBloc>(context).add(GetTodoListEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +47,7 @@ class _MainScreenState extends State<_MainScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _addTodoButton(context);
+          _navigateToAddTodoScreen(context);
         },
         child: const Icon(Icons.add),
       ),
@@ -58,19 +64,19 @@ class _MainScreenState extends State<_MainScreen> {
             } //
 
             final items = state.items;
+
             if (items.isEmpty) {
               return const EmptyList();
             } //
-            else {
-              return const TodoDisplay();
-            }
+
+            return TodoDisplay(todos: items);
           },
         ),
       ),
     );
   }
 
-  void _addTodoButton(BuildContext context) async {
+  void _navigateToAddTodoScreen(BuildContext context) async {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -80,7 +86,7 @@ class _MainScreenState extends State<_MainScreen> {
               value: context.read<TodoListBloc>(),
             ),
           ],
-          child: AddTodoScreen(),
+          child: const AddTodoScreen(),
         ),
       ),
     );
