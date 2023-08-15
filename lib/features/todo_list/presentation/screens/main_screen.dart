@@ -97,6 +97,6 @@ class _MainScreenState extends State<_MainScreen> {
   }
 
   void _onCheckClick(TodoListEntity item) {
-    context.read<TodoListBloc>().add(event);
+    // context.read<TodoListBloc>().add(event);
   }
 }
