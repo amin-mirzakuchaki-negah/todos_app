@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos_app/core/util/extension.dart';
 import 'package:todos_app/features/todo_list/domain/entities/todo_list_entity.dart';
+import 'package:todos_app/features/todo_list/presentation/widgets/title_category_text_style.dart';
 
 class TodoCards extends StatelessWidget {
   final TodoListEntity item;
@@ -48,17 +49,16 @@ class TodoCards extends StatelessWidget {
                   const SizedBox(width: 20),
                   Text(
                     item.title,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
+                    style: textStyle(),
                   ),
                   const Spacer(),
                   Text(
                     item.category?.toStringValue ?? '-',
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
+                    style: textStyle(),
                   ),
                 ],
               ),
+              //second line
               Row(
                 children: [
                   const SizedBox(width: 20),

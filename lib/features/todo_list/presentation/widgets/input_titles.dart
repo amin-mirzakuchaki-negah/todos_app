@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class InputTitle extends StatelessWidget {
   InputTitle({super.key, required this.text});
 

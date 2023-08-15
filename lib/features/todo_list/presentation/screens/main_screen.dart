@@ -70,10 +70,6 @@ class _MainScreenState extends State<_MainScreen> {
               return const EmptyList();
             } //
 
-            // if (state is ToggleSuccessState) {
-            //   _onCheckClick(state.items.elementAt(index));
-            // }
-
             return TodoDisplay(
               todos: items,
               onCheckClick: _onCheckClick,
