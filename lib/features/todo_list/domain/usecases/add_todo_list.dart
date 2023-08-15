@@ -9,21 +9,21 @@ import '../entities/todo_list_entity.dart';
 import '../repositories/todo_list_repository.dart';
 
 @lazySingleton
-class AddTodoList implements UseCase<List<TodoListEntity>, Params> {
+class AddTodoList implements UseCase<List<TodoListEntity>, AddParams> {
   final TodoListRepository todoListRepository;
 
   AddTodoList(this.todoListRepository);
 
   @override
-  Future<Either<Failure, List<TodoListEntity>>> call(Params params) async {
+  Future<Either<Failure, List<TodoListEntity>>> call(AddParams params) async {
     return await todoListRepository.addTodoList(params.entity);
   }
 }
 
-class Params extends Equatable {
+class AddParams extends Equatable {
  final TodoListEntity entity;
 
-  const Params({required this.entity});
+  const AddParams({required this.entity});
 
   @override
   List<Object?> get props => [entity];
