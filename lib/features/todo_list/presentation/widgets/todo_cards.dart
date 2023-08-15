@@ -6,10 +6,12 @@ import 'package:todos_app/features/todo_list/presentation/widgets/title_category
 class TodoCards extends StatelessWidget {
   final TodoListEntity item;
   final Function(TodoListEntity) onCheckedClick;
+  final Function(TodoListEntity) deleteTodo;
   const TodoCards({
     super.key,
     required this.item,
     required this.onCheckedClick,
+    required this.deleteTodo,
   });
 
   @override
@@ -46,16 +48,10 @@ class TodoCards extends StatelessWidget {
                     value: item.done,
                     onChanged: (bool? value) => onCheckedClick(item),
                   ),
-                  const SizedBox(width: 20),
-                  Text(
-                    item.title,
-                    style: textStyle(),
-                  ),
+                  Text(item.title + " " + "(${item.category?.toStringValue ?? '-'})", style: textStyle()),
                   const Spacer(),
-                  Text(
-                    item.category?.toStringValue ?? '-',
-                    style: textStyle(),
-                  ),
+                  //TODO: fix the splash color
+                  IconButton(onPressed: ()=> deleteTodo(item), icon: const Icon(Icons.delete), splashColor: Colors.transparent),
                 ],
               ),
               //second line

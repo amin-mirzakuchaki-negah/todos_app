@@ -107,8 +107,8 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     final body = event.item;
     final deletedTodo = await _deleteTodo(DeleteParams(entity: body));
     final newState = await deletedTodo.fold(
-      (failure) => DeleteTodoFailureState(items: state.items),
-      (deletedtodolist) => DeleteTodoSuccessState(items: state.items),
+      (failure) async => DeleteTodoFailureState(items: state.items),
+      (deletedtodolist) async => DeleteTodoSuccessState(items: state.items),
     );
     emit(newState);
   }

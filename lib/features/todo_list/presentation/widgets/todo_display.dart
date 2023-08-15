@@ -6,10 +6,12 @@ import 'todo_cards.dart';
 class TodoDisplay extends StatelessWidget {
   final List<TodoListEntity> todos;
   final Function(TodoListEntity item) onCheckClick;
+  final Function(TodoListEntity item) deleteTodo;
   const TodoDisplay({
     super.key,
     required this.todos,
     required this.onCheckClick,
+    required this.deleteTodo,
   });
 
   @override
@@ -21,6 +23,7 @@ class TodoDisplay extends StatelessWidget {
         itemBuilder: (context, index) => TodoCards(
             item: todos[index],
             onCheckedClick: onCheckClick,
+            deleteTodo: deleteTodo,
           ),
       ),
     );

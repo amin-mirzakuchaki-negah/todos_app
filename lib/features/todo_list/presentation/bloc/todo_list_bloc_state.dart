@@ -84,6 +84,6 @@ class DeleteTodoFailureState extends TodoListState {
 class DeleteTodoSuccessState extends TodoListState {
   const DeleteTodoSuccessState({required super.items});
 
-  @override
-  List<Object?> get props => [items];
+  // @override
+  // List<Object?> get props => [items];
 }

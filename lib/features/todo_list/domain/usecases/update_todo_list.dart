@@ -12,7 +12,7 @@ class UpdateTodoList implements UseCase<List<TodoListEntity>, UpdateParams> {
 
   final TodoListRepository todoListRepository;
 
-  UpdateTodoList(this.todoListRepository);
+  UpdateTodoList({required this.todoListRepository});
 
   @override
   Future<Either<Failure, List<TodoListEntity>>> call(UpdateParams params) async {
