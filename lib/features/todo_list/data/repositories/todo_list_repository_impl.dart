@@ -48,4 +48,17 @@ class TodoListRepositoryImpl implements TodoListRepository {
       return Left(AddToCacheFailure());
     }
   }
+  
+  @override
+  Future<Either<Failure, List<TodoListEntity>>> deleteOrRedoTodoList(TodoListEntity todoList) async {
+     try {
+
+      final body = TodoListModel.fromEntity(todoList);
+      final items = await todoListLocalDataSource.deleteTodo(body.id);
+      return Right(items);
+    }
+    on AddToCacheException {
+      return Left(AddToCacheFailure());
+    }
+  }
 }

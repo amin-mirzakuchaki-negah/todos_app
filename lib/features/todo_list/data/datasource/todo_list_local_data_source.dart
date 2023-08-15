@@ -10,6 +10,7 @@ abstract class TodoListLocalDataSource {
   Future<List<TodoListModel>> getTodoList();
   Future<List<TodoListEntity>> addTodoList(TodoListModel item);
   Future<List<TodoListEntity>> updateTodoList(TodoListModel item);
+  Future<List<TodoListEntity>> deleteTodo(int id);
 }
 
 const _key = 'key';
@@ -44,7 +45,18 @@ class TodoListLocalDataSourceImpl implements TodoListLocalDataSource {
   @override
   Future<List<TodoListEntity>> updateTodoList(TodoListModel item) async {
     final oldItems = await getTodoList();
-    final newItems = oldItems.map((e) => e.id == item.id? item: e).toList();
+    //finding the intended item in list and replacing id element (Other elements wil be intact)
+    final newItems = oldItems.map((e) => e.id == item.id ? item : e).toList();
+    final data = json.encode(newItems.map((e) => e.toJson).toList());
+    await sharedPreferences.setString(_key, data);
+    return newItems;
+  }
+
+  @override
+  Future<List<TodoListEntity>> deleteTodo(int id) async {
+    final oldItems = await getTodoList();
+    //where: It returns elements of 
+    final newItems = oldItems.where((element) => element.id != id).toList();
     final data = json.encode(newItems.map((e) => e.toJson).toList());
     await sharedPreferences.setString(_key, data);
     return newItems;
