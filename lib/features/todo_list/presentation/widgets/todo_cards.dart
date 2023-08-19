@@ -57,8 +57,9 @@ class TodoCards extends StatelessWidget {
                         onChanged: (bool? value) => onCheckedClick(item),
                       ),
                       Text(
-                          "${item.title} (${item.category?.toStringValue ?? '-'})",
-                          style: textStyle()),
+                        "${item.title} (${item.category?.toStringValue ?? '-'})",
+                        style: textStyle(),
+                      ),
                       const Spacer(),
                       IconButton(
                           onPressed: () => deleteTodo(item),
@@ -67,14 +68,15 @@ class TodoCards extends StatelessWidget {
                     ],
                   ),
                   //second line
-                  Row(
-                    children: [
-                      const SizedBox(width: 20),
-                      Text(
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 20),
+                      child: Text(
                         item.description,
                         style: const TextStyle(fontSize: 14),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ],
+                    ),
                   )
                 ],
               ),

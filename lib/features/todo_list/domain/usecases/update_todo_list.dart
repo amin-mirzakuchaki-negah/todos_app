@@ -12,16 +12,14 @@ class UpdateTodoList implements UseCase<List<TodoListEntity>, UpdateParams> {
 
   final TodoListRepository todoListRepository;
 
-  UpdateTodoList({required this.todoListRepository});
+ const UpdateTodoList({required this.todoListRepository});
 
   @override
-  Future<Either<Failure, List<TodoListEntity>>> call(UpdateParams params) async {
-    return await todoListRepository.updateTodoList(params.entity);
-  }
+  Future<Either<Failure, List<TodoListEntity>>> call(UpdateParams params) => todoListRepository.updateTodoList(params.entity);
 }
 
 class UpdateParams extends Equatable {
- final TodoListEntity? entity;
+ final TodoListEntity entity;
 
   const UpdateParams({required this.entity});
 

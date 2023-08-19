@@ -10,10 +10,8 @@ import '../entities/todo_list_entity.dart';
 class GetTodoList implements UseCase<List<TodoListEntity>, NoParams> {
   final TodoListRepository todoListRepository;
 
-  GetTodoList(this.todoListRepository);
+ const GetTodoList(this.todoListRepository);
 
   @override
-  Future<Either<Failure, List<TodoListEntity>>> call(NoParams params) async {
-    return await todoListRepository.getTodoList();
-  }
+  Future<Either<Failure, List<TodoListEntity>>> call(NoParams params) => todoListRepository.getTodoList();
 }

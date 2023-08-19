@@ -12,12 +12,10 @@ class DeleteTodoList implements UseCase<List<TodoListEntity>, DeleteParams> {
 
   final TodoListRepository todoListRepository;
 
-  DeleteTodoList({required this.todoListRepository});
+ const DeleteTodoList({required this.todoListRepository});
 
   @override
-  Future<Either<Failure, List<TodoListEntity>>> call(DeleteParams params) async {
-    return await todoListRepository.deleteTodoList(params.entity);
-  }
+  Future<Either<Failure, List<TodoListEntity>>> call(DeleteParams params) => todoListRepository.deleteTodoList(params.entity);
 }
 
 class DeleteParams extends Equatable {

@@ -42,7 +42,7 @@ class UpdateTodoListEvent extends TodoListEvent {
   final String title;
   final String description;
   final MyCategory? category;
-   final TodoListEntity? item;
+   final TodoListEntity item;
 
   const UpdateTodoListEvent({
     required this.title,

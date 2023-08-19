@@ -12,12 +12,10 @@ import '../repositories/todo_list_repository.dart';
 class AddTodoList implements UseCase<List<TodoListEntity>, AddParams> {
   final TodoListRepository todoListRepository;
 
-  AddTodoList(this.todoListRepository);
+ const AddTodoList(this.todoListRepository);
 
   @override
-  Future<Either<Failure, List<TodoListEntity>>> call(AddParams params) async {
-    return await todoListRepository.addTodoList(params.entity);
-  }
+  Future<Either<Failure, List<TodoListEntity>>> call(AddParams params) => todoListRepository.addTodoList(params.entity);
 }
 
 class AddParams extends Equatable {

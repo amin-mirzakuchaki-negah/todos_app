@@ -37,9 +37,9 @@ class TodoListRepositoryImpl implements TodoListRepository {
 
   @override
   Future<Either<Failure, List<TodoListEntity>>> updateTodoList(
-      TodoListEntity? todoList) async {
+      TodoListEntity todoList) async {
     try {
-      final body = TodoListModel.fromEntity(todoList!);
+      final body = TodoListModel.fromEntity(todoList);
       final items = await todoListLocalDataSource.updateTodoList(body);
       return Right(items);
     } on UpdateTodoException {

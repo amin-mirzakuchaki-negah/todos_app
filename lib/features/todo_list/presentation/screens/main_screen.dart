@@ -44,33 +44,28 @@ class _MainScreenState extends State<_MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("انجام دادنی ها",
-            style: TextStyle(color: Colors.greenAccent)),
+        title: const Text(
+          "انجام دادنی ها",
+          style: TextStyle(color: Colors.greenAccent),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _navigateToAddTodoScreen(context);
-        },
+        onPressed: () => _navigateToAddTodoScreen(context),
         child: const Icon(Icons.add),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocBuilder<TodoListBloc, TodoListState>(
           builder: (context, state) {
-            if (state is TodoListLoadingState) {
-              return const LoadingDisplay();
-            } //
+            if (state is TodoListLoadingState) return const LoadingDisplay();
+            //
             if (state is GetTodoListFromCacheFailureState) {
               return Text(state.message ??
                   "There is problem in getting todos from cache");
             } //
-
             final items = state.items;
-
-            if (items.isEmpty) {
-              return const EmptyList();
-            } //
-
+            if (items.isEmpty) return const EmptyList();
+            //
             return TodoDisplay(
               todos: items,
               onCheckClick: _onCheckClick,
@@ -94,7 +89,7 @@ class _MainScreenState extends State<_MainScreen> {
               value: context.read<TodoListBloc>(),
             ),
           ],
-          child: const AddOrUpdateTodoScreen(isUpdated: false, item: null),
+          child: const AddOrUpdateTodoScreen(),
         ),
       ),
     );
@@ -113,7 +108,7 @@ class _MainScreenState extends State<_MainScreen> {
               value: context.read<TodoListBloc>(),
             ),
           ],
-          child: AddOrUpdateTodoScreen(isUpdated: true, item: item),
+          child: AddOrUpdateTodoScreen(item: item),
         ),
       ),
     );
@@ -136,9 +131,7 @@ class _MainScreenState extends State<_MainScreen> {
         ),
       ),
       context: context,
-      builder: (context) {
-        return DetailsBottomSheet(item: item);
-      },
+      builder: (context) => DetailsBottomSheet(item: item),
     );
   }
 }

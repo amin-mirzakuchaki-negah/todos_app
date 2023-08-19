@@ -127,7 +127,7 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
       return;
     }
 
-    final body = event.item?.updateTodo(
+    final body = event.item.updateTodo(
       title: title,
       description: description,
       category: category,

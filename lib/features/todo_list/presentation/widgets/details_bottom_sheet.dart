@@ -8,7 +8,7 @@ class DetailsBottomSheet extends StatelessWidget {
 
   final TodoListEntity item;
 
-  final double widthSize = 14;
+  final double _widthSize = 14;
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +34,7 @@ class DetailsBottomSheet extends StatelessWidget {
               Text(item.title),
               const SizedBox(height: 15),
               const Text('توضیحات', style: TextStyle(fontSize: 18)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SingleChildScrollView(
-                    child: Text(item.description),
-                  ),
-                ],
-              ),
+             Text(item.description),
               const SizedBox(height: 20),
               const Text('دسته بندی'),
               Text(item.category!.toStringValue),
@@ -49,7 +42,7 @@ class DetailsBottomSheet extends StatelessWidget {
               Row(
                 children: [
                   const Text("تاریخ ساخت"),
-                  SizedBox(width: widthSize),
+                  SizedBox(width: _widthSize),
                   const Text('زمان ساخت'),
                   const Spacer(),
                 ],
@@ -57,7 +50,7 @@ class DetailsBottomSheet extends StatelessWidget {
               Row(
                 children: [
                   Text(item.createdAt?.toDate(item.createdAt) ?? "-/-/-"),
-                  SizedBox(width: widthSize),
+                  SizedBox(width: _widthSize),
                   Text(item.createdAt?.toTime(item.createdAt) ?? "-/-/-"),
                 ],
               ),
@@ -65,14 +58,14 @@ class DetailsBottomSheet extends StatelessWidget {
               Row(
                 children: [
                   const Text("تاریخ بروزرسانی"),
-                  SizedBox(width: widthSize),
+                  SizedBox(width: _widthSize),
                   const Text('زمان بروزرسانی'),
                 ],
               ),
               Row(
                 children: [
                   Text(item.updatedAt?.toDate(item.updatedAt) ?? "-/-/-"),
-                  SizedBox(width: widthSize),
+                  SizedBox(width: _widthSize),
                   Text(item.updatedAt?.toTime(item.updatedAt) ?? "-/-/-"),
                 ],
               ),
