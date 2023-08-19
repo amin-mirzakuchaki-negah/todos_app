@@ -54,3 +54,7 @@ class UpdateTodoListEvent extends TodoListEvent {
   @override
   List<Object?> get props => [title, description, category, item];
 }
+
+class InitialTodoListEvent extends TodoListEvent {
+  
+}

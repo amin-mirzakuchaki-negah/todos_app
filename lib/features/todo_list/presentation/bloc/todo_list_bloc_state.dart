@@ -9,31 +9,32 @@ sealed class TodoListState extends Equatable {
 
   @override
   List<Object?> get props => [items];
+  bool get isFailure => switch (this) {
+        TitleInputFailureState() ||
+        DescriptionInputFailureState() ||
+        CategoryInputFailureState() =>
+          true,
+        _ => false,
+      };
 }
 
-final class TodoListInitialState extends TodoListState {}
+final class TodoListInitialState extends TodoListState {
+  const TodoListInitialState({super.items});
+}
 
 class TitleInputFailureState extends TodoListState {
-
   const TitleInputFailureState({required super.items});
-
 }
 
 class DescriptionInputFailureState extends TodoListState {
-
   const DescriptionInputFailureState({required super.items});
-
 }
 
 class CategoryInputFailureState extends TodoListState {
-
   const CategoryInputFailureState({required super.items});
-
 }
 
-
 class TodoListLoadingState extends TodoListState {
-  
   const TodoListLoadingState({required super.items});
 }
 
@@ -90,6 +91,6 @@ class UpdateTodoListSuccessState extends TodoListState {
 }
 
 class UpdateTodoListFailureState extends TodoListState {
-   @override
+  @override
   List<Object?> get props => [items];
 }

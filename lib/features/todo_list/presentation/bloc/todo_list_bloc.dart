@@ -30,13 +30,21 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
         _addTodoList = addTodoList,
         _updateTodo = updateTodo,
         _deleteTodo = deleteTodo,
-        super(TodoListInitialState()) {
+        super(const TodoListInitialState()) {
     //Initializing our bloc
     on<GetTodoListEvent>(_onGetTodoListEvent);
     on<AddTodoListEvent>(_onAddTodoListEvent, transformer: droppable());
     on<ToggleTodoListEvent>(_onToggleTodoEvent, transformer: droppable());
     on<DeleteTodoListEvent>(_onDeleteTodoListEvent, transformer: droppable());
     on<UpdateTodoListEvent>(_onUpdateListTodoEvent, transformer: droppable());
+    on<InitialTodoListEvent>(_onInitialTodoListEvent);
+  }
+
+  Future<void> _onInitialTodoListEvent(
+    InitialTodoListEvent event,
+    Emitter<TodoListState> emit,
+  ) async {
+    emit(TodoListInitialState(items: state.items));
   }
 
   Future<void> _onGetTodoListEvent(
@@ -108,6 +116,16 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     final title = event.title;
     final description = event.description;
     final category = event.category;
+
+     if (title.isEmpty) {
+      emit(TitleInputFailureState(items: state.items));
+      return;
+    }
+
+    if (description.isEmpty) {
+      emit(DescriptionInputFailureState(items: state.items));
+      return;
+    }
 
     final body = event.item?.updateTodo(
       title: title,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_app/core/util/extension.dart';
+import 'package:todos_app/features/todo_list/presentation/widgets/failure_dialog.dart';
 
 import '../../../../core/util/enum.dart';
 import '../../domain/entities/todo_list_entity.dart';
@@ -44,6 +45,9 @@ class _AddOrUpdateTodoScreenState extends State<AddOrUpdateTodoScreen> {
       listener: (context, state) {
         if (state is AddTodoListSuccessState) Navigator.of(context).pop();
         if (state is UpdateTodoListSuccessState) Navigator.of(context).pop();
+        if (state.isFailure) {
+          _showFailureDialog(context, widget.isUpdated);
+        }
       },
       child: Scaffold(
         appBar: AppBar(
@@ -51,7 +55,7 @@ class _AddOrUpdateTodoScreenState extends State<AddOrUpdateTodoScreen> {
               widget.isUpdated
                   ? "بروز کردن ${widget.item!.title}"
                   : 'اضافه کردن انجام دادنی ها',
-              style: TextStyle(color: Colors.greenAccent)),
+              style: const TextStyle(color: Colors.greenAccent)),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.greenAccent),
             onPressed: () {
@@ -175,12 +179,26 @@ class _AddOrUpdateTodoScreenState extends State<AddOrUpdateTodoScreen> {
 
   void _updateTodo() {
     if (widget.item != null) {
-      context.read<TodoListBloc>().add(UpdateTodoListEvent(
-            title: _titleController.text,
-            description: _descriptionController.text,
-            category: _selectedCategory,
-            item: widget.item,
-          ));
+      context.read<TodoListBloc>().add(
+            UpdateTodoListEvent(
+              title: _titleController.text,
+              description: _descriptionController.text,
+              category: _selectedCategory,
+              item: widget.item,
+            ),
+          );
     }
+  }
+
+  void _showFailureDialog(BuildContext context, bool isUpdated) async {
+    await showDialog(
+        context: context,
+        builder: (context) => FailureDialog(
+              onTapped: () {
+                Navigator.of(context).pop();
+              },
+              isUpdated: isUpdated,
+            ));
+    context.read<TodoListBloc>().add(InitialTodoListEvent());
   }
 }
