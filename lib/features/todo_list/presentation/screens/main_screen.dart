@@ -6,6 +6,7 @@ import 'package:todos_app/features/todo_list/presentation/screens/add_or_update_
 import 'package:todos_app/features/todo_list/presentation/widgets/empty_list.dart';
 
 import '../../../../injection_container.dart';
+import '../widgets/details_bottom_sheet.dart';
 import '../widgets/loading_display.dart';
 import '../widgets/todo_display.dart';
 
@@ -74,6 +75,8 @@ class _MainScreenState extends State<_MainScreen> {
               todos: items,
               onCheckClick: _onCheckClick,
               deleteTodo: _deleteTodo,
+              onCardTapped: _onCardTapped,
+              navigateToUpdateScreen: _navigateToUpdateTodoScreen,
             );
           },
         ),
@@ -91,13 +94,16 @@ class _MainScreenState extends State<_MainScreen> {
               value: context.read<TodoListBloc>(),
             ),
           ],
-          child:  const AddOrUpdateTodoScreen(isUpdated: false, item: null),
+          child: const AddOrUpdateTodoScreen(isUpdated: false, item: null),
         ),
       ),
     );
   }
 
-  void _navigateToUpdateTodoScreen(BuildContext context, TodoListEntity item) async {
+  void _navigateToUpdateTodoScreen(
+    TodoListEntity item,
+    BuildContext context,
+  ) async {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -107,7 +113,7 @@ class _MainScreenState extends State<_MainScreen> {
               value: context.read<TodoListBloc>(),
             ),
           ],
-          child:  AddOrUpdateTodoScreen(isUpdated: true, item: item),
+          child: AddOrUpdateTodoScreen(isUpdated: true, item: item),
         ),
       ),
     );
@@ -119,5 +125,14 @@ class _MainScreenState extends State<_MainScreen> {
 
   void _deleteTodo(TodoListEntity item) {
     context.read<TodoListBloc>().add(DeleteTodoListEvent(item: item));
+  }
+
+  void _onCardTapped(TodoListEntity item, BuildContext context) {
+    showBottomSheet(
+      context: context,
+      builder: (context) {
+        return DetailsBottomSheet(item: item);
+      },
+    );
   }
 }

@@ -7,11 +7,15 @@ class TodoDisplay extends StatelessWidget {
   final List<TodoListEntity> todos;
   final Function(TodoListEntity item) onCheckClick;
   final Function(TodoListEntity item) deleteTodo;
+  final Function(TodoListEntity item, BuildContext context) onCardTapped;
+  final Function(TodoListEntity, BuildContext) navigateToUpdateScreen;
   const TodoDisplay({
     super.key,
     required this.todos,
     required this.onCheckClick,
     required this.deleteTodo,
+    required this.onCardTapped,
+    required this.navigateToUpdateScreen,
   });
 
   @override
@@ -27,6 +31,8 @@ class TodoDisplay extends StatelessWidget {
             item: reversedItems.toList()[index],
             onCheckedClick: onCheckClick,
             deleteTodo: deleteTodo,
+            onCardTapped: onCardTapped,
+            navigateToUpdateScreen: navigateToUpdateScreen,
           ),
       ),
     );
