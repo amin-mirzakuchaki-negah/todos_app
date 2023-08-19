@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos_app/core/util/extension.dart';
 import 'package:todos_app/features/todo_list/domain/entities/todo_list_entity.dart';
-import 'package:todos_app/features/todo_list/presentation/widgets/details_bottom_sheet.dart';
 import 'package:todos_app/features/todo_list/presentation/widgets/title_category_text_style.dart';
 
 class TodoCards extends StatelessWidget {
@@ -40,7 +39,7 @@ class TodoCards extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(8),
-          onTap: () => _onCardTaped(context),
+          onTap: () => onCardTapped(item, context),
           onLongPress: () => navigateToUpdateScreen(item, context),
           child: Padding(
             padding: const EdgeInsetsDirectional.only(end: 6, bottom: 8),
@@ -83,15 +82,6 @@ class TodoCards extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _onCardTaped(BuildContext context) {
-    showBottomSheet(
-      context: context,
-      builder: (context) {
-        return DetailsBottomSheet(item: item);
-      },
     );
   }
 }

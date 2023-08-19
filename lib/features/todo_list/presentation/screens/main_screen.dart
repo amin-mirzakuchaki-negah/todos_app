@@ -128,7 +128,13 @@ class _MainScreenState extends State<_MainScreen> {
   }
 
   void _onCardTapped(TodoListEntity item, BuildContext context) {
-    showBottomSheet(
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8),
+          topRight: Radius.circular(8),
+        ),
+      ),
       context: context,
       builder: (context) {
         return DetailsBottomSheet(item: item);
