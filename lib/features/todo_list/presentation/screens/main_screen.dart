@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos_app/features/todo_list/domain/entities/todo_list_entity.dart';
 import 'package:todos_app/features/todo_list/presentation/bloc/todo_list_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todos_app/features/todo_list/presentation/screens/add_todo_screen.dart';
+import 'package:todos_app/features/todo_list/presentation/screens/add_or_update_todo_screen.dart';
 import 'package:todos_app/features/todo_list/presentation/widgets/empty_list.dart';
 
 import '../../../../injection_container.dart';
@@ -91,7 +91,23 @@ class _MainScreenState extends State<_MainScreen> {
               value: context.read<TodoListBloc>(),
             ),
           ],
-          child: const AddTodoScreen(),
+          child:  const AddOrUpdateTodoScreen(isUpdated: false, item: null),
+        ),
+      ),
+    );
+  }
+
+  void _navigateToUpdateTodoScreen(BuildContext context, TodoListEntity item) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_context) => MultiBlocProvider(
+          providers: [
+            BlocProvider<TodoListBloc>.value(
+              value: context.read<TodoListBloc>(),
+            ),
+          ],
+          child:  AddOrUpdateTodoScreen(isUpdated: true, item: item),
         ),
       ),
     );

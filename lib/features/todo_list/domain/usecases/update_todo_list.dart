@@ -21,7 +21,7 @@ class UpdateTodoList implements UseCase<List<TodoListEntity>, UpdateParams> {
 }
 
 class UpdateParams extends Equatable {
- final TodoListEntity entity;
+ final TodoListEntity? entity;
 
   const UpdateParams({required this.entity});
 

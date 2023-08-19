@@ -35,6 +35,7 @@ class TodoListModel extends TodoListEntity {
           return value.toJalali;
         }(),
       );
+
   @override
   TodoListModel copyWith({
     int? id,
@@ -49,6 +50,7 @@ class TodoListModel extends TodoListEntity {
         updatedAt: updatedAt ?? this.updatedAt,
         category: category,
       );
+      
   //converting entity to model
   factory TodoListModel.fromEntity(TodoListEntity entity) => TodoListModel(
         title: entity.title,

@@ -37,3 +37,20 @@ class DeleteTodoListEvent extends TodoListEvent {
   @override
   List<Object?> get props => [item];
 }
+
+class UpdateTodoListEvent extends TodoListEvent {
+  final String title;
+  final String description;
+  final MyCategory? category;
+   final TodoListEntity? item;
+
+  const UpdateTodoListEvent({
+    required this.title,
+    required this.description,
+    required this.category,
+    required this.item,
+  });
+
+  @override
+  List<Object?> get props => [title, description, category, item];
+}

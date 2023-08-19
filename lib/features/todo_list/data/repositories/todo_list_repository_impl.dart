@@ -37,13 +37,13 @@ class TodoListRepositoryImpl implements TodoListRepository {
 
   @override
   Future<Either<Failure, List<TodoListEntity>>> updateTodoList(
-      TodoListEntity todoList) async {
+      TodoListEntity? todoList) async {
     try {
-      final body = TodoListModel.fromEntity(todoList);
+      final body = TodoListModel.fromEntity(todoList!);
       final items = await todoListLocalDataSource.updateTodoList(body);
       return Right(items);
-    } on AddToCacheException {
-      return Left(AddToCacheFailure());
+    } on UpdateTodoException {
+      return Left(UpdateTodoFailure());
     }
   }
 
@@ -54,8 +54,8 @@ class TodoListRepositoryImpl implements TodoListRepository {
       final body = TodoListModel.fromEntity(todoList);
       final items = await todoListLocalDataSource.deleteTodo(body.id);
       return Right(items);
-    } on AddToCacheException {
-      return Left(AddToCacheFailure());
+    } on DeleteTodoException {
+      return Left(DeleteTodoFailure());
     }
   }
 }

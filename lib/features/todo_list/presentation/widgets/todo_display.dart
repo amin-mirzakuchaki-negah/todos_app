@@ -16,12 +16,15 @@ class TodoDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final reversedItems = todos.reversed;
+
     return Padding(
       padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
       child: ListView.builder(
         itemCount: todos.length,
         itemBuilder: (context, index) => TodoCards(
-            item: todos[index],
+            item: reversedItems.toList()[index],
             onCheckedClick: onCheckClick,
             deleteTodo: deleteTodo,
           ),

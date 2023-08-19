@@ -50,6 +50,21 @@ class TodoListEntity extends Equatable {
         category: category,
       );
 
+  TodoListEntity updateTodo({
+    String? title,
+    String? description,
+    MyCategory? category,
+  }) =>
+      TodoListEntity(
+        title: title ?? this.title,
+        description: description ?? this.description,
+        id: id,
+        done: done,
+        createdAt: createdAt,
+        updatedAt: Jalali.now(),
+        category: category ?? this.category,
+      );
+
   TodoListEntity toggleDone() => TodoListEntity(
         title: title,
         description: description,

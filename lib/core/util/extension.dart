@@ -70,6 +70,33 @@ extension JalaliExt on Jalali {
   }
 }
 
+extension JalaliToDate on Jalali {
+  String toDate(Jalali? jalali) {
+    if (jalali != null) {
+      int year = jalali.year;
+      int month = jalali.month;
+      int day = jalali.day;
+      return "$year/$month/$day";
+    } //
+    else {
+      return "-/-/-";
+    }
+  }
+}
+
+extension JalaliToTime on Jalali {
+  String toTime(Jalali? jalali) {
+     if (jalali != null) {
+      int hour = jalali.hour;
+      int minute = jalali.minute;
+      return "$hour:$minute";
+    } //
+    else {
+      return "-/-/-";
+    }
+  }
+}
+
 extension TodoListEntityExt on TodoListEntity {
   List<dynamic> toList() {
     return [title, description, id, done, createdAt, updatedAt, category];

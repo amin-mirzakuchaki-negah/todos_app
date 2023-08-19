@@ -36,6 +36,7 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     on<AddTodoListEvent>(_onAddTodoListEvent, transformer: droppable());
     on<ToggleTodoListEvent>(_onToggleTodoEvent, transformer: droppable());
     on<DeleteTodoListEvent>(_onDeleteTodoListEvent, transformer: droppable());
+    on<UpdateTodoListEvent>(_onUpdateListTodoEvent, transformer: droppable());
   }
 
   Future<void> _onGetTodoListEvent(
@@ -96,6 +97,28 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     final newState = await todo.fold(
       (failure) async => ToggleTodoFailureState(items: state.items),
       (todolist) async => ToggleSuccessState(items: todolist),
+    );
+    emit(newState);
+  }
+
+  Future<void> _onUpdateListTodoEvent(
+    UpdateTodoListEvent event,
+    Emitter<TodoListState> emit,
+  ) async {
+    final title = event.title;
+    final description = event.description;
+    final category = event.category;
+
+    final body = event.item?.updateTodo(
+      title: title,
+      description: description,
+      category: category,
+    );
+    final todo = await _updateTodo(UpdateParams(entity: body));
+    final newState = await todo.fold(
+      (failure) async => UpdateTodoListFailureState(),
+      (updatedtodolist) async =>
+          UpdateTodoListSuccessState(items: updatedtodolist),
     );
     emit(newState);
   }
