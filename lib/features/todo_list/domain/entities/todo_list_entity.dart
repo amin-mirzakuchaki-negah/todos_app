@@ -7,7 +7,7 @@ class TodoListEntity extends Equatable {
   final String description;
   final int id;
   final bool done;
-  final Jalali? createdAt;
+  final Jalali? createdAt; // question: why createdAt is nullable?
   final Jalali? updatedAt;
   final MyCategory? category;
 
@@ -36,7 +36,7 @@ class TodoListEntity extends Equatable {
         category: category,
       );
 
-  TodoListEntity copyWith({
+  TodoListEntity copyWith({ //question: why
     int? id,
     Jalali? updatedAt,
   }) =>

@@ -45,7 +45,7 @@ class TodoListLocalDataSourceImpl implements TodoListLocalDataSource {
   @override
   Future<List<TodoListEntity>> updateTodoList(TodoListModel item) async {
     final oldItems = await getTodoList();
-    //finding the intended item in list and replacing id element (Other elements wil be intact)
+    //finding the intended item in list and replacing id element (Other elements will be intact)
     final newItems = oldItems.map((e) => e.id == item.id ? item : e).toList();
     final data = json.encode(newItems.map((e) => e.toJson).toList());
     await sharedPreferences.setString(_key, data);
