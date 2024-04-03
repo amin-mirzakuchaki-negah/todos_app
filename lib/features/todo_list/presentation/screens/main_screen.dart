@@ -50,6 +50,8 @@ class _MainScreenState extends State<_MainScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.greenAccent.shade400,
+        foregroundColor: Colors.white70,
         onPressed: () => _navigateToAddTodoScreen(context),
         child: const Icon(Icons.add),
       ),

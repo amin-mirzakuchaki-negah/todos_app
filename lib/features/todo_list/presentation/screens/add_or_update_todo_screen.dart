@@ -68,6 +68,8 @@ class _AddOrUpdateTodoScreenState extends State<AddOrUpdateTodoScreen> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          foregroundColor: Colors.white70,
+          backgroundColor: Colors.greenAccent.shade400,
           onPressed: () {
             if (_isUpdate) {
               _updateTodo();

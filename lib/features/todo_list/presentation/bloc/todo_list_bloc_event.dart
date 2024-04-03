@@ -42,7 +42,7 @@ class UpdateTodoListEvent extends TodoListEvent {
   final String title;
   final String description;
   final MyCategory? category;
-   final TodoListEntity item;
+  final TodoListEntity item;
 
   const UpdateTodoListEvent({
     required this.title,
@@ -55,6 +55,4 @@ class UpdateTodoListEvent extends TodoListEvent {
   List<Object?> get props => [title, description, category, item];
 }
 
-class InitialTodoListEvent extends TodoListEvent {
-  
-}
+class InitialTodoListEvent extends TodoListEvent {}
